@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assignments</title>
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Assignments</h1>
+      <form>
+        <div class="form-group">
+          <label>Title:</label>
+          <input
+            type="text"
+            name="title"
+            class="form-control"
+            value="Java Assignment"
+            required=""
+          />
+        </div>
+        <div class="form-group">
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            class="form-control"
+            value="first-project"
+            required=""
+          />
+        </div>
+        <div class="form-group">
+          <label>Submission Date Time:</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="subdate"
+            name="sdate"
+            value="2021-06-01T19:30"
+            min="2021-06-01T00:00"
+            max="2022-07-01T00:00"
+            required=""
+          />
+        </div>
+        <div class="form-group">
+          <label>Oral Mark:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="omark"
+            name="omark"
+            value="80"
+            min="0"
+            max="100"
+            required=""
+          />
+        </div>
+        <div class="form-group">
+          <label>Total Mark:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="tmark"
+            name="tmark"
+            value="80"
+            min="0"
+            max="100"
+            required=""
+          />
+        </div>
+        <button type="submit" class="btn btn-success btn-save">Save</button>
+      </form>
+      <br />
+      <table id="t" class="table table-bordered data-table">
+        <thead>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Submission Date Time</th>
+          <th>Oral Mark</th>
+          <th>Total Mark</th>
+          <th>Action</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $("form").submit(function (e) {
+      e.preventDefault();
+      var title = $("input[name='title']").val();
+      var description = $("input[name='description']").val();
+      var sdate = $("input[name='sdate']").val();
+      var omark = $("input[name='omark']").val();
+      var tmark = $("input[name='tmark']").val();
+
+      $(".data-table tbody").append(
+        "<tr data-title='" +
+          title +
+          "' data-description='" +
+          description +
+          "'data-sdate='" +
+          sdate +
+          "' data-omark='" +
+          omark +
+          "' data-tmark='" +
+          tmark +
+          "'><td>" +
+          title +
+          "</td><td>" +
+          description +
+          "</td><td>" +
+          sdate +
+          "</td><td>" +
+          omark +
+          "</td><td>" +
+          tmark +
+          "</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type='button'>Edit</button></td></tr>"
+      );
+
+      $("input[name='']").val("");
+    });
+
+    $("body").on("click", ".btn-delete", function () {
+      $(this).parents("tr").remove();
+    });
+
+    $("body").on("click", ".btn-edit", function () {
+      var title = $(this).parents("tr").attr("data-title");
+      var description = $(this).parents("tr").attr("data-description");
+      var sdate = $(this).parents("tr").attr("data-sdate");
+      var omark = $(this).parents("tr").attr("data-omark");
+      var tmark = $(this).parents("tr").attr("data-tmark");
+
+      $(this)
+        .parents("tr")
+        .find("td:eq(0)")
+        .html("<input name='edit_text' value='" + title + "'>");
+      $(this)
+        .parents("tr")
+        .find("td:eq(1)")
+        .html("<input name='edit_text' value='" + description + "'>");
+      $(this)
+        .parents("tr")
+        .find("td:eq(2)")
+        .html("<input name='edit_datetime-local' value='" + sdate + "'>");
+      $(this)
+        .parents("tr")
+        .find("td:eq(3)")
+        .html("<input name='edit_number' value='" + omark + "'>");
+      $(this)
+        .parents("tr")
+        .find("td:eq(4)")
+        .html("<input name='edit_number' value='" + tmark + "'>");
+
+      $(this)
+        .parents("tr")
+        .find("td:eq(5)")
+        .prepend(
+          "<button type='button' class='btn btn-info btn-lg btn-update mr-3'>Update</button>"
+        );
+      $(this).hide();
+    });
+
+    $("body").on("click", ".btn-update", function () {
+      var title = $(this).parents("tr").find("input[name='edit_text']").val();
+      var description = $(this)
+        .parents("tr")
+        .find("input[name='edit_text']")
+        .val();
+      var sdate = $(this)
+        .parents("tr")
+        .find("input[name='edit_datetime-local']")
+        .val();
+      var omark = $(this).parents("tr").find("input[name='edit_omark']").val();
+      var tmark = $(this).parents("tr").find("input[name='edit_tmark']").val();
+
+      $(this).parents("tr").find("td:eq(0)").text(title);
+      $(this).parents("tr").find("td:eq(1)").text(description);
+      $(this).parents("tr").find("td:eq(2)").datetime - local(sdate);
+      $(this).parents("tr").find("td:eq(3)").number(omark);
+      $(this).parents("tr").find("td:eq(4)").number(tmark);
+
+      $(this).parents("tr").attr("data-title", title);
+      $(this).parents("tr").attr("data-description", description);
+      $(this).parents("tr").attr("data-sdate", sdate);
+      $(this).parents("tr").attr("data-omark", omark);
+      $(this).parents("tr").attr("data-tmark", tmark);
+
+      $(this).parents("tr").find(".btn-edit").show();
+      $(this).parents("tr").find(".btn-update").remove();
+    });
+  </script>
+</html>

@@ -1,0 +1,50 @@
+#main {
+  color: #404e67;
+  background-image: url("image5.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-family: "Open Sans", sans-serif;
+
+  background-size: cover;
+}
+.nav-item {
+  width: 12%;
+  text-align: end;
+  background-color: #c7be17c4;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav {
+  margin-left: 25px;
+}
+
+body {
+  color: #404e67;
+  background-image: url("image5.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-family: "Open Sans", sans-serif;
+
+  background-size: cover;
+}
+h1 {
+  width: 30%;
+  text-align: center;
+  background-color: #c7be17c4;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  margin-left: 5px;
+  color: white;
+  padding: 10px;
+}
+form {
+  width: 30%;
+}
+#t {
+  background-color: white;
+}
